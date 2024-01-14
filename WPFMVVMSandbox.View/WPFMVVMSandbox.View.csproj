@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net481</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\WPFMVVMSandbox.ViewModel\WPFMVVMSandbox.ViewModel.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Local\" />
+	</ItemGroup>
+
+</Project>

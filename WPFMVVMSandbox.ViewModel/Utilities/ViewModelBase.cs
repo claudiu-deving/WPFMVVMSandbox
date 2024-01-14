@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace WPFMVVMSandbox.ViewModel.Utilities;
 
 
-public class ErrorManager : INotifyDataErrorInfo
+public class ErrorManager : INotifyDataErrorInfo, IErrorManager
 {
     public bool HasErrors { get; private set; }
 
@@ -62,14 +62,9 @@ public class ErrorManager : INotifyDataErrorInfo
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 }
 
-public class ViewModelBase : INotifyPropertyChanged
+public class ViewModelBase(IErrorManager? errorManager = null) : INotifyPropertyChanged
 {
-    public ViewModelBase()
-    {
-        ErrorManager = new ErrorManager();
-    }
-
-    protected ErrorManager ErrorManager { get; }
+    protected IErrorManager ErrorManager { get; } = errorManager ??= new ErrorManager();
 
     /// <summary>
     /// Event that is fired when a property is changed

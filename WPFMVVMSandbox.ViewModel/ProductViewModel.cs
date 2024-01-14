@@ -15,6 +15,7 @@ public class ProductViewModel : ViewModelBase
         set
         {
             _createdDate = value;
+            //The error would come from a validator
             ErrorManager.AddErrors(new List<string> { "Created Date cannot be changed" });
             OnPropertyChanged();
         }

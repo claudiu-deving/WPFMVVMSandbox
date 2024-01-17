@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFMVVMSandbox.ViewModel", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.MVVM", "Library.MVVM\Library.MVVM.csproj", "{DB20C311-F54A-4F0D-85DA-1083A392EB2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Infrastructure", "Library.Infrastructure\Library.Infrastructure.csproj", "{A5AF3A79-5504-482E-BBBD-17900C011649}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5AF3A79-5504-482E-BBBD-17900C011649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5AF3A79-5504-482E-BBBD-17900C011649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5AF3A79-5504-482E-BBBD-17900C011649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5AF3A79-5504-482E-BBBD-17900C011649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

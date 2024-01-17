@@ -1,17 +1,15 @@
-﻿using System.Collections;
+﻿#nullable enable
 using System.Collections.Concurrent;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace WPFMVVMSandbox.ViewModel.Utilities;
 
+namespace Library.MVVM;
 
 public class ErrorManager : INotifyDataErrorInfo, IErrorManager
 {
     public bool HasErrors { get; private set; }
 
     private readonly ConcurrentDictionary<string, List<string>> _errors = [];
-    public IEnumerable? GetErrors([CallerMemberName] string? propertyName = null)
+    public IEnumerable? GetErrors(string propertyName)
     {
         if (propertyName is null) { return null; }
         if (string.IsNullOrEmpty(propertyName))
@@ -27,10 +25,10 @@ public class ErrorManager : INotifyDataErrorInfo, IErrorManager
         return null;
     }
 
-    public void AddErrors(List<string> errors, [CallerMemberName] string? propertyName = null)
+    public void AddErrors(IEnumerable<string> errors, string propertyName)
     {
         if (propertyName is null) { return; }
-        _errors.AddOrUpdate(propertyName, errors, (key, existingVal) =>
+        _errors.AddOrUpdate(propertyName, errors.ToList(), (key, existingVal) =>
         {
             existingVal.AddRange(errors);
             return existingVal;
@@ -39,7 +37,7 @@ public class ErrorManager : INotifyDataErrorInfo, IErrorManager
     }
 
 
-    public bool ClearErrors([CallerMemberName] string? propertyName = null)
+    public bool ClearErrors(string propertyName)
     {
         if (propertyName is null) { return false; }
         if (!_errors.ContainsKey(propertyName))
@@ -60,23 +58,4 @@ public class ErrorManager : INotifyDataErrorInfo, IErrorManager
         HasErrors = _errors.Any();
     }
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-}
-
-public class ViewModelBase(IErrorManager? errorManager = null) : INotifyPropertyChanged
-{
-    protected IErrorManager ErrorManager { get; } = errorManager ??= new ErrorManager();
-
-    /// <summary>
-    /// Event that is fired when a property is changed
-    /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Method that is called when a property is changed
-    /// </summary>
-    /// <param name="propertyName">The name of the parameter, leave empty when the caller is property's setter.</param>
-    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 }

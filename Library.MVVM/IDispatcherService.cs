@@ -1,4 +1,5 @@
-﻿namespace WPFMVVMSandbox.ViewModel.Utilities;
+﻿#nullable enable
+namespace Library.MVVM;
 
 public interface IDispatcherService
 {

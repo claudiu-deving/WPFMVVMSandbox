@@ -1,40 +1,165 @@
-﻿<UserControl x:Class="WPFMVVMSandbox.View.ProductView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFMVVMSandbox.View"
-             d:Background="AntiqueWhite"
-             mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="300">
+﻿<UserControl
+    x:Class="WPFMVVMSandbox.View.ProductView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mvvm="clr-namespace:Library.MVVM;assembly=Library.MVVM"
+    xmlns:viewmodel="clr-namespace:WPFMVVMSandbox.ViewModel;assembly=WPFMVVMSandbox.ViewModel"
+    Height="300"
+    d:DataContext="{d:DesignInstance Type=viewmodel:ProductViewModel}"
+    d:Background="AntiqueWhite"
+    d:DesignWidth="300"
+    mc:Ignorable="d"
+    >
+    <UserControl.Resources>
+        <Style
+            x:Key="BaseStyle"
+            TargetType="FrameworkElement"
+            >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="100" />
+        </Style>
+        <Style
+            x:Key="BaseValidationStyle"
+            TargetType="FrameworkElement"
+            BasedOn="{StaticResource BaseStyle}"
+            >
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder />
+                            <ItemsControl
+                                Margin="0,5,0,0"
+                                FontSize="12"
+                                ItemsSource="{Binding}"
+                                >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Foreground="Red"
+                                            Text="{Binding ErrorContent}"
+                                            />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style
+            TargetType="DatePicker"
+            BasedOn="{StaticResource BaseValidationStyle}"
+            />
+        <Style
+            TargetType="TextBox"
+            BasedOn="{StaticResource BaseValidationStyle}"
+            />
+        <Style
+            TargetType="Label"
+            BasedOn="{StaticResource BaseStyle}"
+            />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.Resources>
-            <Style TargetType="TextBox">
-                <Setter Property="Margin" Value="5"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Width" Value="100"/>
-            </Style>
-        </Grid.Resources>
-        <Label Grid.Row="0" Grid.Column="0" Content="Product Name:"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ProductName}"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Product Description:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ProductDescription}"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Product Price:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ProductPrice}"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Product Quantity:"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ProductQuantity}"/>
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Command="{Binding SaveCommand}" Width="80" Height="30"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Product Name:"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+            />
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Product Description:"
+            />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+            />
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="Product Price:"
+            />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            >
+            <TextBox.Text>
+                <Binding
+                    Path="Price"
+                    UpdateSourceTrigger="PropertyChanged"
+                    ValidatesOnNotifyDataErrors="True"
+                    >
+                    <Binding.ValidationRules>
+                        <mvvm:IsNotStringRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+
+        </TextBox>
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="Product Quantity:"
+            />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            >
+            <TextBox.Text>
+                <Binding
+                    Path="Quantity"
+                    UpdateSourceTrigger="PropertyChanged"
+                    ValidatesOnNotifyDataErrors="True"
+                    >
+                    <Binding.ValidationRules>
+                        <mvvm:IsNotStringRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Content="Product Updated:"
+            />
+        <DatePicker
+            Grid.Row="4"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            SelectedDate="{Binding UpdatedDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+            />
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Width="80"
+            Height="30"
+            Margin="0,10,0,0"
+            Content="Save"
+            Command="{Binding SaveCommand}"
+            />
     </Grid>
 </UserControl>

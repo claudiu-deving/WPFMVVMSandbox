@@ -8,10 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="9.5.4" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\Library.MVVM\Library.MVVM.csproj" />
 		<ProjectReference Include="..\WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj" />
 	</ItemGroup>
 

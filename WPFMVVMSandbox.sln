@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFMVVMSandbox.View", "WPFMVVMSandbox.View\WPFMVVMSandbox.View.csproj", "{39674479-8946-4D92-8AEA-53DBA3559DF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMVVMSandbox.Model", "WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj", "{B5EF9B70-D93E-419E-A07A-CEFA417BFCA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFMVVMSandbox.Model", "WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj", "{B5EF9B70-D93E-419E-A07A-CEFA417BFCA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMVVMSandbox.ViewModel", "WPFMVVMSandbox.ViewModel\WPFMVVMSandbox.ViewModel.csproj", "{B2BA3F43-2695-4F56-854F-C1C22BC8F41C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFMVVMSandbox.ViewModel", "WPFMVVMSandbox.ViewModel\WPFMVVMSandbox.ViewModel.csproj", "{B2BA3F43-2695-4F56-854F-C1C22BC8F41C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.MVVM", "Library.MVVM\Library.MVVM.csproj", "{DB20C311-F54A-4F0D-85DA-1083A392EB2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B2BA3F43-2695-4F56-854F-C1C22BC8F41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2BA3F43-2695-4F56-854F-C1C22BC8F41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2BA3F43-2695-4F56-854F-C1C22BC8F41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB20C311-F54A-4F0D-85DA-1083A392EB2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

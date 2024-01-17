@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>net481</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -10,11 +10,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj" />
 		<ProjectReference Include="..\WPFMVVMSandbox.ViewModel\WPFMVVMSandbox.ViewModel.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Local\" />
+	  <Folder Include="Local\" />
 	</ItemGroup>
 
 </Project>

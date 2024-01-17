@@ -1,116 +1,45 @@
-﻿using WPFMVVMSandbox.ViewModel.Utilities;
+﻿using Library.MVVM;
+
 
 namespace WPFMVVMSandbox.ViewModel;
 
-
-
 public class ProductViewModel : ViewModelBase
 {
-
-    #region Public Properties
-
-    public DateTime CreatedDate
+    public ProductViewModel()
     {
-        get => _createdDate;
-        set
-        {
-            _createdDate = value;
-            //The error would come from a validator
-            ErrorManager.AddErrors(new List<string> { "Created Date cannot be changed" });
-            OnPropertyChanged();
-        }
     }
 
-    public string? Description
+    private CommandBase? _saveCommand;
+    #region Properties
+    public DateTime CreatedDate { get => GetProperty<DateTime>(); set => SetProperty(value); }
+
+    [IsNotEmpty]
+    public string? Description { get => GetProperty<string?>(); set => SetProperty(value); }
+
+    public int Id { get => GetProperty<int>(); set => SetProperty(value); }
+
+    public string? Image { get => GetProperty<string?>(); set => SetProperty(value); }
+
+    [IsNotEmpty]
+    public string? Name { get => GetProperty<string>(); set => SetProperty(value); }
+    [IsNotEmpty]
+    public decimal Price { get => GetProperty<decimal>(); set => SetProperty(value); }
+    [IsNotEmpty]
+    public int Quantity { get => GetProperty<int>(); set => SetProperty(value); }
+
+    [DateLater]
+    public DateTime? UpdatedDate { get => GetProperty<DateTime?>(); set => SetProperty(value); }
+
+    public CommandBase SaveCommand { get => _saveCommand ??= CommandFactory.Create(ExecuteSave, CanExecuteSave); }
+
+    private bool CanExecuteSave(object arg)
     {
-        get => _description;
-        set
-        {
-            _description = value;
-            OnPropertyChanged();
-        }
+        return !HasErrors;
     }
 
-    public int Id
+    private void ExecuteSave(object obj)
     {
-        get => _id;
-        set
-        {
-            _id = value;
-            OnPropertyChanged();
-        }
+        Console.WriteLine("Saved");
     }
-
-    public string? Image
-    {
-        get => _image;
-        set
-        {
-            _image = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            _name = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public decimal Price
-    {
-        get => _price;
-        set
-        {
-            _price = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public int Quantity
-    {
-        get => _quantity;
-        set
-        {
-            _quantity = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public DateTime? UpdatedDate
-    {
-        get => _updatedDate;
-        set
-        {
-            _updatedDate = value;
-            OnPropertyChanged();
-        }
-    }
-
-
-    #endregion Public Properties
-
-    #region Private Methods
-
-    #endregion Private Methods
-
-    #region Private Fields
-
-    private DateTime _createdDate;
-
-    private string? _description;
-
-    //Represents the viewmodel object for the Product object
-    private int _id;
-    private string? _image;
-    private string _name = string.Empty;
-    private decimal _price;
-    private int _quantity;
-    private DateTime? _updatedDate;
-
-    #endregion Private Fields
+    #endregion Properties
 }

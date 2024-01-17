@@ -1,12 +1,28 @@
-﻿<Window x:Class="WPFMVVMSandbox.View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFMVVMSandbox.View"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<Window
+    x:Class="WPFMVVMSandbox.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WPFMVVMSandbox.View"
+    xmlns:model="clr-namespace:WPFMVVMSandbox.Model;assembly=WPFMVVMSandbox.Model"
+    xmlns:vm="clr-namespace:WPFMVVMSandbox.ViewModel;assembly=WPFMVVMSandbox.ViewModel"
+    Title="MainWindow"
+    Width="800"
+    Height="650"
+    mc:Ignorable="d"
+    >
     <Grid>
+        <ListBox
+            ItemsSource="{Binding Products}"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            >
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="vm:ProductViewModel">
+                    <local:ProductView DataContext="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>

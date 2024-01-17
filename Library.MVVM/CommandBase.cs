@@ -1,13 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System.Threading;
+using System.Windows.Input;
+#nullable enable
 
-
-namespace WPFMVVMSandbox.ViewModel.Utilities;
+namespace Library.MVVM;
 
 public class CommandBase : ICommand
 {
     private readonly Func<object, bool>? _canExecute;
     private readonly Delegate _execute;
-    private readonly IDispatcherService _dispatcherService;
+    private readonly TaskScheduler _uiScheduler;
 
     /// <summary>
     /// Event that is fired when the command's state changes
@@ -18,20 +19,19 @@ public class CommandBase : ICommand
     /// Creates a new command.
     /// </summary>
     /// <param name="execute"></param>
-    public CommandBase(Action<object> execute, IDispatcherService dispatcherService)
-        : this(execute, null, dispatcherService)
+    public CommandBase(Action<object> execute, TaskScheduler uiScheduler)
+        : this(execute, null, uiScheduler)
     {
-        _dispatcherService = dispatcherService;
+
     }
 
     /// <summary>
     /// Creates a new command using an async method.
     /// </summary>
     /// <param name="executeAsync"></param>
-    public CommandBase(Func<object, Task> executeAsync, IDispatcherService dispatcherService)
-        : this(executeAsync, null, dispatcherService)
+    public CommandBase(Func<object, Task> executeAsync, TaskScheduler uiScheduler)
+        : this(executeAsync, null, uiScheduler)
     {
-        _dispatcherService = dispatcherService;
     }
 
     /// <summary>
@@ -40,11 +40,11 @@ public class CommandBase : ICommand
     /// <param name="execute"></param>
     /// <param name="canExecute"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public CommandBase(Action<object> execute, Func<object, bool>? canExecute, IDispatcherService dispatcherService)
+    public CommandBase(Action<object> execute, Func<object, bool>? canExecute, TaskScheduler uiScheduler)
     {
         _execute = execute ?? throw new ArgumentNullException(nameof(execute));
         _canExecute = canExecute;
-        _dispatcherService = dispatcherService;
+        _uiScheduler = uiScheduler;
     }
 
     /// <summary>
@@ -53,11 +53,11 @@ public class CommandBase : ICommand
     /// <param name="executeAsync"></param>
     /// <param name="canExecute"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public CommandBase(Func<object, Task> executeAsync, Func<object, bool>? canExecute, IDispatcherService dispatcherService)
+    public CommandBase(Func<object, Task> executeAsync, Func<object, bool>? canExecute, TaskScheduler uiScheduler)
     {
         _execute = executeAsync ?? throw new ArgumentNullException(nameof(executeAsync));
         _canExecute = canExecute;
-        _dispatcherService = dispatcherService;
+        _uiScheduler = uiScheduler;
     }
 
     /// <summary>
@@ -91,9 +91,9 @@ public class CommandBase : ICommand
     /// </summary>
     public void RaiseCanExecuteChanged()
     {
-        _dispatcherService.Invoke(() =>
+        Task.Factory.StartNew(() =>
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        });
+        }, CancellationToken.None, TaskCreationOptions.None, _uiScheduler);
     }
 }

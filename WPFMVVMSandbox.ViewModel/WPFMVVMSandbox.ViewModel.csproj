@@ -12,4 +12,10 @@
 		<ProjectReference Include="..\WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Reference Include="Library.Infrastructure">
+	    <HintPath>..\Library.Infrastructure\bin\Debug\net7\Library.Infrastructure.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
 </Project>

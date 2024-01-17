@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Library.Infrastructure\Library.Infrastructure.csproj" />
 		<ProjectReference Include="..\WPFMVVMSandbox.Model\WPFMVVMSandbox.Model.csproj" />
 		<ProjectReference Include="..\WPFMVVMSandbox.ViewModel\WPFMVVMSandbox.ViewModel.csproj" />
 	</ItemGroup>

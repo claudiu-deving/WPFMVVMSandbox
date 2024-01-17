@@ -23,6 +23,7 @@ namespace WPFMVVMSandbox.View
         public ProductView()
         {
             InitializeComponent();
+
         }
     }
 }

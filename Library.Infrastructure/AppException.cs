@@ -1,24 +1,25 @@
-﻿namespace Library.Infrastructure
+﻿namespace Library.Infrastructure.ExceptionHandling;
+
+
+public class AppException : Exception
 {
-    public class AppException : Exception
+    public new Exception InnerException { get; }
+    public ExceptionType IsRecoverable { get; }
+    public ExceptionVisibility IsShownToUser { get; }
+    public ExceptionSeverity Severity { get; }
+    public string DisplayMessage { get; }
+    public AppException(
+        string message,
+        string displayMessage,
+        ExceptionType isRecoverable,
+        ExceptionVisibility isShownToUser,
+        ExceptionSeverity severity,
+        Exception innerException) : base(message)
     {
-        public bool IsRecoverable { get; }
-        public bool IsShownToUser { get; }
-
-        public AppException(string message, bool isRecoverable = false, bool isShownToUser = false)
-            : base(message)
-        {
-            IsRecoverable = isRecoverable;
-            IsShownToUser = isShownToUser;
-        }
-
-        public AppException RecoverableException(string message)
-        {
-            return new AppException(message, true, false);
-        }
-        public override string ToString()
-        {
-            return Message;
-        }
+        IsRecoverable = isRecoverable;
+        IsShownToUser = isShownToUser;
+        Severity = severity;
+        DisplayMessage = displayMessage;
+        InnerException = innerException;
     }
 }

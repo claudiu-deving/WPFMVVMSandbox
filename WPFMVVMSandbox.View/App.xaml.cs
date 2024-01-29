@@ -1,5 +1,6 @@
 ﻿using Library.Infrastructure.ExceptionHandling;
 
+using Tekla.Structures;
 using System.Windows;
 
 namespace WPFMVVMSandbox.View;
@@ -11,12 +12,6 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        var exceptionHandler = ExceptionHandlerProvider.DefaultImplementation();
-        base.OnStartup(e);
-        Dispatcher.UnhandledException += (sender, args) =>
-        {
-            exceptionHandler.Handle(args.Exception);
-            args.Handled = true;
-        };
+        new Tekla.Structures.Model.Model().CommitChanges("");
     }
 }

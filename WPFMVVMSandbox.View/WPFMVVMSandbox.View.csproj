@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net481</TargetFramework>
+		<TargetFramework>net8-windows</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
@@ -16,7 +16,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Local\" />
+		<Folder Include="Local\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.1" />
+	  <PackageReference Include="Microsoft.Windows.Compatibility.Shims" Version="2.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Tekla.Structures">
+	    <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2020.0\nt\bin\plugins\Tekla.Structures.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Tekla.Structures.Model">
+	    <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2020.0\nt\bin\plugins\Tekla.Structures.Model.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Tekla.Technology.Serialization">
+	    <HintPath>..\..\..\..\..\..\..\Program Files\Tekla Structures\2020.0\nt\bin\Tekla.Technology.Serialization.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

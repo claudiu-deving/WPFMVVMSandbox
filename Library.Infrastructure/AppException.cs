@@ -3,7 +3,7 @@
 
 public class AppException : Exception
 {
-    public new Exception InnerException { get; }
+    public new Exception? InnerException { get; }
     public ExceptionType IsRecoverable { get; }
     public ExceptionVisibility IsShownToUser { get; }
     public ExceptionSeverity Severity { get; }
@@ -14,7 +14,7 @@ public class AppException : Exception
         ExceptionType isRecoverable,
         ExceptionVisibility isShownToUser,
         ExceptionSeverity severity,
-        Exception innerException) : base(message)
+        Exception? innerException) : base(message)
     {
         IsRecoverable = isRecoverable;
         IsShownToUser = isShownToUser;
